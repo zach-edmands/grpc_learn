@@ -5,7 +5,6 @@ import (
 	"google.golang.org/grpc"
 	pb "grpc_learn/client/ecommerce"
 	"log"
-	"time"
 )
 
 const address = "localhost:50051"
@@ -24,8 +23,7 @@ func main() {
 	// add a product by calling the gRPC server
 	name := "zachPhone 13"
 	desc := "the best phone"
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
+	ctx := context.TODO()
 	res, err := c.AddProduct(
 		ctx,
 		&pb.Product{Name: name, Description: desc},
@@ -40,5 +38,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("could not get product %v", err)
 	}
-	log.Printf("got product: %s", product)
+	log.Printf("got product: %v", product)
 }
